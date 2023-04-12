@@ -15,6 +15,7 @@ import {locationInput} from '../../interfaces/Location';
 import {UserIdWithToken} from '../../interfaces/User';
 import rectangleBounds from '../../utils/rectangleBounds';
 import catModel from '../models/catModel';
+import {Types} from 'mongoose';
 
 export default {
   Query: {
@@ -45,6 +46,7 @@ export default {
           extensions: {code: 'NOT_AUTHORIZED'},
         });
       }
+      args.owner = user.id as unknown as Types.ObjectId;
       const cat = new catModel(args);
       return await cat.save();
     },

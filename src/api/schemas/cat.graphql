@@ -49,7 +49,6 @@ type Mutation {
     cat_name: String!
     weight: Float!
     birthdate: DateTime!
-    owner: ID!
     location: LocationInput!
     filename: String!
   ): Cat
