@@ -66,5 +66,29 @@ export default {
       }
       return await catModel.findByIdAndDelete(args.id);
     },
+    updateCatAsAdmin: async (
+      _parent: undefined,
+      args: Cat,
+      user: UserIdWithToken
+    ) => {
+      if (user.role !== 'admin') {
+        throw new GraphQLError('Not authorized', {
+          extensions: {code: 'NOT_AUTHORIZED'},
+        });
+      }
+      return await catModel.findByIdAndUpdate(args.id, args, {new: true});
+    },
+    deleteCatAsAdmin: async (
+      _parent: undefined,
+      args: Cat,
+      user: UserIdWithToken
+    ) => {
+      if (user.role !== 'admin') {
+        throw new GraphQLError('Not authorized', {
+          extensions: {code: 'NOT_AUTHORIZED'},
+        });
+      }
+      return await catModel.findByIdAndDelete(args.id);
+    },
   },
 };

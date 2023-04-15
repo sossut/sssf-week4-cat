@@ -5,27 +5,37 @@ import {UserIdWithToken} from '../interfaces/User';
 export default async (req: Request) => {
   const bearer = req.headers.authorization;
   if (!bearer) {
-    return {};
+    return {
+      id: '',
+      token: '',
+      role: '',
+    };
   }
 
   const token = bearer.split(' ')[1];
 
   if (!token) {
-    return {};
+    return {
+      id: '',
+      token: '',
+      role: '',
+    };
   }
 
-  const userFromToken = jwt.verify(token, process.env.JWT_SECRET as string) as {
-    id: string;
-  };
+  const userFromToken = jwt.verify(
+    token,
+    process.env.JWT_SECRET as string
+  ) as UserIdWithToken;
 
   if (!userFromToken) {
-    return {};
+    return {
+      id: '',
+      token: '',
+      role: '',
+    };
   }
 
-  const userIdWithToken: UserIdWithToken = {
-    id: userFromToken.id,
-    token,
-  };
+  userFromToken.token = token;
 
-  return userIdWithToken;
+  return userFromToken;
 };

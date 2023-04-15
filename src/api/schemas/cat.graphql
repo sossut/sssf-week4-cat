@@ -61,4 +61,11 @@ type Mutation {
     filename: String
   ): Cat
   deleteCat(id: ID!): Cat
+  updateCatAsAdmin(
+    id: ID!
+    cat_name: String
+    weight: Float
+    birthdate: DateTime
+  ): Cat
+  deleteCatAsAdmin(id: ID!): Cat
 }
