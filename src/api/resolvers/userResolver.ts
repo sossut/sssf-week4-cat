@@ -170,7 +170,7 @@ export default {
       console.log(user);
       console.log(args);
 
-      const response = await fetch(`${process.env.AUTH_URL}/users${args.id}`, {
+      const response = await fetch(`${process.env.AUTH_URL}/users/${args.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -197,7 +197,7 @@ export default {
         });
       }
 
-      const response = await fetch(`${process.env.AUTH_URL}/users${args.id}`, {
+      const response = await fetch(`${process.env.AUTH_URL}/users/${args.id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
